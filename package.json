@@ -1,0 +1,28 @@
+{
+  "name": "kv-api",
+  "version": "1.0.0",
+  "description": "Key value pair api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "scabusas",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.12.0"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "body-parser": "^1.18.0",
+    "chai": "^4.1.2",
+    "express": "^4.15.4",
+    "mocha": "^3.5.3",
+    "moment": "^2.18.1",
+    "mongoose": "^4.11.11",
+    "rewire": "^2.5.2",
+    "sinon": "^3.2.1",
+    "sinon-as-promised": "^4.0.3",
+    "sinon-mongoose": "^2.0.2"
+  }
+}
