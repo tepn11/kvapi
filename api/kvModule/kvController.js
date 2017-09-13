@@ -16,7 +16,7 @@ var addNew = function (req, res) {
       res.json(resp);
     }).catch(function (err) {
     if (err)
-      res.send(err);
+      res.status(400).send(err);
     });
 };
 
@@ -28,7 +28,7 @@ var get = function (req, res) {
       res.json(resp);
     }).catch(function (err) {
     if (err)
-      res.send(err);
+      res.status(400).send(err);
   });
 };
 

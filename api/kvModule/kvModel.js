@@ -53,19 +53,23 @@ var get = function(key, timeStamp){
       if (timeStamp) {
         qry = keyVal.find({"key": key}).sort({timestamp: -1});
         qry.then(function (res) {
-          for (var i = 0, arrLen = res.length; i < arrLen; i++){
-            if (timeStamp >= res[i]._doc.timestamp){
-              value = res[i]._doc.value;
-              break;
+          if(res.length > 0) {
+            for (var i = 0, arrLen = res.length; i < arrLen; i++) {
+              if (timeStamp >= res[i]._doc.timestamp) {
+                value = res[i]._doc.value;
+                break;
+              }
             }
-          }
-          if(value) {
-            resolve({
-              msg: 'Successfully fetched value of key: ' + key + ' at Timestamp: ' + timeStamp,
-              value: value
-            });
+            if (value) {
+              resolve({
+                msg: 'Successfully fetched value of key: ' + key + ' at Timestamp: ' + timeStamp,
+                value: value
+              });
+            } else {
+              reject({err: 'Error: Could not find the value of key: ' + key + ' at Timestamp: ' + timeStamp});
+            }
           } else {
-            reject({err: 'Error: Could not find the value of key: ' + key + ' at Timestamp: ' + timeStamp});
+            reject({msg: 'Unable to find key: ' + key, value: value});
           }
         }, function (err) {
           console.log(err);
@@ -74,8 +78,12 @@ var get = function(key, timeStamp){
       } else {
         qry = keyVal.find({"key": key}).sort({timestamp: -1}).limit(1);
         qry.then(function (res) {
-          value = res[0]._doc.value;
-          resolve({msg: 'Successfully fetched value of key: ' + key, value: value});
+          if(res.length > 0) {
+            value = res[0]._doc.value;
+            resolve({msg: 'Successfully fetched value of key: ' + key, value: value});
+          } else {
+            reject({msg: 'Unable to find key: ' + key, value: value});
+          }
         }, function (err) {
           console.log(err);
           reject({err: 'Error: unable to find key value pair'});

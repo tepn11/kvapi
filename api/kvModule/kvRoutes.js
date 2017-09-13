@@ -5,12 +5,12 @@ module.exports = function(app) {
   app.route('/')
     .get(kvController.welcome);
 
-  app.route('/object')
+  app.route('/api/object')
     .post(kvController.addNew);
 
-  app.route('/object/:key/')
+  app.route('/api/object/:key/')
     .get(kvController.get);
 
-  app.route('/object/:key/:timestamp')
+  app.route('/api/object/:key/:timestamp')
     .get(kvController.get)
 };
